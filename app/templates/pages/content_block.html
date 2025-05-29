@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="{% static 'styles/navigation-bar-styles.css' %}">
+    <body>
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="{% url 'home' %}?actor={{ actor }}&ID={{member_ID}}"> 
+                    <img src="{% static 'images/home_icon.png' %}">
+                </a>
+            </div>
+            <div class="nav-mid">
+                <a href="{% url 'home' %}?actor={{ actor }}&ID={{member_ID}}">Home</a>
+                <a href="{% url 'slide' %}?actor={{ actor }}&ID={{member_ID}}">Slides</a>
+                <a href="{% url 'RecycleCenter' %}?actor={{ actor }}&ID={{member_ID}}">Recycle Center</a>
+            </div>
+            <div class="nav-right">
+                {% if actor == "guest" %}
+                    <a href="{% url 'login' %}">Login</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Logout</a>
+                {% endif %}
+                
+            </div>
+        </nav>
+    </body>
+</html>
+
+
+{% block content %}
+
+{% endblock content %}
