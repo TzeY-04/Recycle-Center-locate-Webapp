@@ -11,9 +11,31 @@
     </head>
     <body>
         <div class="container">
+            <h1>Slides page</h1>
+            <p>{{actor}} and {{member_ID}}</p>
             <div class="container2">
-                <h1>Slides page</h1>
-                <p>{{actor}} and {{member_ID}}</p>
+                <form action="SearchedSlide" method="POST">
+                    {% csrf_token %}
+                    <label for="slide_type">Search by type:</label>
+                    <select name="slide_type" id="slide_type">
+                        <option value="paper">Paper</option>
+                        <option value="plastic">Plastic</option>
+                        <option value="can">Can</option>
+                        <option value="tin">Tin</option>
+                    </select>
+                    <input type="hidden" name="actor" value="{{ actor }}">
+                    <input type="hidden" name="ID" value="{{ member_ID }}">
+                    <input type="hidden" name="slide_word" value="">
+                    <button type="submit">Search</button>
+                </form>
+                <form action="SearchedSlide" method="POST">
+                    {% csrf_token %}
+                    <p>Search by word</p>
+                    <input type="text" name="slide_word"  placeholder="Search..." required>
+                    <input type="hidden" name="actor" value="{{ actor }}">
+                    <input type="hidden" name="ID" value="{{ member_ID }}">
+                    <button type="submit">Search</button>
+                </form> 
             </div>
         </div>
     </body>

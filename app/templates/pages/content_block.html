@@ -5,9 +5,20 @@
     <body>
         <nav class="navbar">
             <div class="nav-left">
-                <a href="{% url 'home' %}?actor={{ actor }}&ID={{member_ID}}"> 
-                    <img src="{% static 'images/home_icon.png' %}">
-                </a>
+                {% if actor == "guest" %}
+                    <img src="{% static 'images/notification_icon.png' %}">
+                {% else %}
+                    <a href="{% url 'Notification' %}?actor={{ actor }}&ID={{member_ID}}"> 
+                        <img src="{% static 'images/notification_icon.png' %}">
+                    </a>
+                {% endif %}
+            </div>
+            <div class="nav-left2">
+                {% if actor == "guest" %}
+                    <a>Guest</a>
+                {% else %}
+                    <a>Member</a>
+                {% endif %}
             </div>
             <div class="nav-mid">
                 <a href="{% url 'home' %}?actor={{ actor }}&ID={{member_ID}}">Home</a>

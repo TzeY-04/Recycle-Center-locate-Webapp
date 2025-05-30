@@ -9,9 +9,10 @@ class Member(models.Model):
 
 class Slide(models.Model):
     SLIDE_TYPE_CHOICES = [
-        ('Paper', 'Paper'),
-        ('Can', 'Can'),
-        ('Tin', 'Tin'),
+        ('paper', 'paper'),
+        ('plastic', 'plastic'),
+        ('can', 'can'),
+        ('tin', 'tin'),
     ]
     slide_ID = models.CharField(max_length=4, primary_key=True)
     slide_type = models.CharField(max_length=20, choices=SLIDE_TYPE_CHOICES)
@@ -22,3 +23,8 @@ class RecycleCenter(models.Model):
     rc_ID = models.CharField(max_length=4, primary_key=True)
     rc_address = models.CharField(max_length=100)
     rc_name = models.CharField(max_length=100)
+
+class SlideComment(models.Model):
+    slide_ID = models.ForeignKey(Slide, on_delete=models.CASCADE)
+    member_ID = models.ForeignKey(Member, on_delete=models.CASCADE,null=True)
+    comment = models.TextField()

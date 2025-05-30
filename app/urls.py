@@ -7,4 +7,7 @@ urlpatterns = [
     path('home',views.home_view, name="home"),
     path('slide',views.slide_view, name="slide"),
     path('RecycleCenter',views.RC_view, name="RecycleCenter"),
+    path('SearchedSlide',views.search_slide_view, name="SearchedSlide"),
+    path('SelectedSlide',views.selected_slide_view, name="SelectedSlide"),
+    path('Notification',views.notification_view, name="Notification"),
 ]

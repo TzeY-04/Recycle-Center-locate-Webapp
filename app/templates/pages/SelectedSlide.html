@@ -1,0 +1,51 @@
+{% extends "pages/content_block.html" %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Selected Slides</title>
+        <link rel="stylesheet" href="{% static 'styles/SelectedSlide-styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Selected Slides page</h1>
+            <p>{{actor}} and {{member_ID}}</p>
+            <div class="container2">
+                <div>
+                    <ul>
+                        <li>Title: {{ slide.slide_title }}</li>
+                        <img src="{% static 'images/' %}{{ slide.slide_ID }}.png" alt="{{ slide.slide_title }}">
+                        <li>Description: {{ slide.slide_description }}</li>
+                    </ul>
+                </div>
+                <div>
+                    
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p>Leave a comment</p>
+                        <input type="text" name="comment"  placeholder="Leave ur comment..." required>
+                        <input type="hidden" name="actor" value="{{ actor }}">
+                        <input type="hidden" name="ID" value="{{ member_ID }}">
+                        <input type="hidden" name="slideID" value="{{ slide.slide_ID }}">
+                        {% if actor == "guest" %}
+                        <button type="submit" disabled>Submit</button>
+                        {% else %}
+                            <button type="submit">Submit</button>
+                        {% endif %}
+                    </form> 
+
+                    <h2>Comments</h2>
+                    {% for comment in comments %}
+                        <p>{{ comment.member_ID.member_name }}: {{ comment.comment }}</p>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends "pages/content_block.html" %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Searched Slides</title>
+        <link rel="stylesheet" href="{% static 'styles/SearchedSlide-styles.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="container2">
+                <h1>Searched Slides page</h1>
+                <p>{{actor}} and {{member_ID}}</p>
+                <p>{{found_message}}</p>
+                <ul>
+                    {% for related_slide in related_slides %}
+                        <li>Title : {{ related_slide.slide_title }}</li>
+                        <li>Type : {{ related_slide.slide_type }}</li>
+                        <form action="SelectedSlide" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="actor" value="{{ actor }}">
+                            <input type="hidden" name="ID" value="{{ member_ID }}">
+                            <input type="hidden" name="slideID" value="{{ related_slide.slide_ID}}">
+                            <button type="submit">Select</button>
+                        </form>
+                    {% endfor %}
+                </ul>
+                
+            </div>
+        </div>
+        
+    </body>
+</html>
+
+{% endblock content %}
