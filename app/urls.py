@@ -10,4 +10,5 @@ urlpatterns = [
     path('SearchedSlide',views.search_slide_view, name="SearchedSlide"),
     path('SelectedSlide',views.selected_slide_view, name="SelectedSlide"),
     path('Notification',views.notification_view, name="Notification"),
+    path('SearchRecycleCenter',views.search_RC_view, name="SearchRecycleCenter"),
 ]

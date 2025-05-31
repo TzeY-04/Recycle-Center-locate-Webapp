@@ -4,19 +4,35 @@
 {% block content %}
 
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>RecycleCenter</title>
-        <link rel="stylesheet" href="{% static 'styles/RC-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <div class="container2">
-                <h1>RecycleCenter</h1>
-                <p>{{actor}} and {{member_ID}}</p>
-            </div>
+<html>
+<head>
+  <title>Recycle Centers main page</title>
+  <link rel="stylesheet" href="{% static 'styles/RC-styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="container2">
+            <h1>RecycleCenter</h1>
+            <p>{{actor}} and {{member_ID}}</p>
         </div>
-    </body>
+    </div>
+    <form action="SearchRecycleCenter" method="POST">
+        {% csrf_token %}
+        <p>Find Nearby Recycle Center by Region (eg. Puchong/Kajang)</p>
+        <input type="text" name="region"  placeholder="Your Region..." required>
+        <input type="hidden" name="actor" value="{{ actor }}">
+        <input type="hidden" name="ID" value="{{ member_ID }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>New Found Recycle Center</p>
+        <input type="hidden" name="actor" value="{{ actor }}">
+        <input type="hidden" name="ID" value="{{ member_ID }}">
+        <button type="submit">Fill up form</button>
+    </form>
+</body>
 </html>
 
 {% endblock content %}

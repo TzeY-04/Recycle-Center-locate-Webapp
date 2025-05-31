@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .form import LoginForm
 from .slides import SearchSlide
 from .comments import Comment
+from .models import RecycleCenter,Region
 
 # Create your views here.
 
@@ -90,7 +91,40 @@ def RC_view(request):
     member_ID = request.GET.get("ID")
     return render(request, 'pages/RecycleCenter.html', context={
        "actor":actor,
-       "member_ID":member_ID
+       "member_ID":member_ID,
+    })
+
+def search_RC_view(request):
+    actor = request.POST.get('actor')
+    member_ID = request.POST.get("ID")
+    searchregion = request.POST.get("region")
+    searchregion=searchregion.lower()
+    searchregion=searchregion.replace(" ", "")
+    
+    recycle_centers_qs = list(RecycleCenter.objects.filter(rc_region=searchregion))
+    # Convert queryset to list of dictionaries
+    recycle_centers = [
+        {
+            "rc_name": rc.rc_name,
+            "rc_latitude": rc.rc_latitude,
+            "rc_longitude": rc.rc_longitude,
+            "rc_address": rc.rc_address,
+            "rc_ID": rc.rc_ID
+        }
+        for rc in recycle_centers_qs
+    ]
+
+    region_obj = Region.objects.get(region=searchregion)
+    region = {
+        "region": region_obj.region,
+        "region_latitude": region_obj.region_latitude,
+        "region_longitude": region_obj.region_longitude,
+    }
+    return render(request, 'pages/SearchRecycleCenter.html', context={
+       "actor":actor,
+       "member_ID":member_ID,
+       "recycle_centers":recycle_centers,
+       "region":region
     })
 
 def notification_view(request):

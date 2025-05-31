@@ -1,0 +1,73 @@
+{% extends "pages/content_block.html" %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nearby Recycle Centers</title>
+  <link rel="stylesheet" href="{% static 'styles/SearchRC-styles.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="container2">
+            <h1>RecycleCenter</h1>
+            <p>{{actor}} and {{member_ID}}</p>
+        </div>
+    </div>
+    <form action="SearchRecycleCenter" method="POST">
+        {% csrf_token %}
+        <p>Find Nearby Recycle Center by Region</p>
+        <input type="text" name="region"  placeholder="Your Region..." required>
+        <input type="hidden" name="actor" value="{{ actor }}">
+        <input type="hidden" name="ID" value="{{ member_ID }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Recycle Centers Map</h2>
+    <!-- change the data format to javascript data (json) -->
+    {{ recycle_centers|json_script:"rc_json" }}
+    {{ region|json_script:"region_json" }}
+
+    <div id="map">
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            // Creates a Leaflet map & Sets the center view
+            let recycle_centers = JSON.parse(document.getElementById('rc_json').textContent)
+            let region = JSON.parse(document.getElementById('region_json').textContent)
+
+            const map = L.map('map').setView([region.region_latitude, region.region_longitude], 12);
+
+            // load the actual map tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            // place marker on map
+            recycle_centers.forEach(recycle_center => {
+                L.marker([recycle_center.rc_latitude, recycle_center.rc_longitude]).addTo(map)
+                .bindPopup(recycle_center.rc_name)
+            });
+        </script>
+    </div>
+    <div>
+        <h2>Address of Recycle Centers</h2>
+        <ul>
+            {% for recycle_center in recycle_centers %}
+                <li>{{recycle_center.rc_name}}: {{recycle_center.rc_address}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
+{% endblock content %}
+<style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
+  </style>
