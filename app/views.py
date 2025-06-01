@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .form import LoginForm
 from .slides import SearchSlide
 from .comments import Comment
-from .models import RecycleCenter,Region
+from .models import RecycleCenter,Region,NewFoundRecycleCenter,Member
 
 # Create your views here.
 
@@ -125,6 +125,56 @@ def search_RC_view(request):
        "member_ID":member_ID,
        "recycle_centers":recycle_centers,
        "region":region
+    })
+
+def new_RC_found(request):
+    actor = request.POST.get('actor')
+    member_ID = request.POST.get("ID")
+    
+    return render(request, 'pages/NewFoundRecycleCenter.html', context={
+        "actor":actor,
+        "member_ID":member_ID,
+    })
+    
+def new_RC_form(request):
+    actor = request.POST.get('actor')
+    member_ID = request.POST.get("ID")
+    rc__name = request.POST.get("rc__name")
+    rc__address = request.POST.get("rc__address")
+    region_name = request.POST.get("rc__region")
+    region_name = region_name.lower()
+    region_name = region_name.replace(" ", "")
+    rc__latitude = float(request.POST.get("rc__latitude")) if request.POST.get("rc__latitude") else None
+    rc__longitude = float(request.POST.get("rc__longitude")) if request.POST.get("rc__longitude") else None
+
+    try:
+        rc__submitby = Member.objects.get(member_ID=member_ID)
+        rc__region = Region.objects.get(region=region_name)
+    except (Member.DoesNotExist, Region.DoesNotExist):
+        return render(request, 'pages/NewFoundRecycleCenter.html', {
+                "actor": actor,
+                "member_ID": member_ID,
+                "rc__name": rc__name,
+                "rc__address": rc__address,
+                "rc__latitude": rc__latitude,
+                "rc__longitude": rc__longitude,
+                "rc__region": region_name,
+                "error": "Region not found. Please check and try again."
+            })
+
+    new_found = NewFoundRecycleCenter(
+        rc_latitude = rc__latitude,
+        rc_longitude = rc__longitude,
+        rc_name = rc__name,
+        rc_address = rc__address,
+        rc_region = rc__region,
+        rc_submitby = rc__submitby,
+    )
+    new_found.save()
+   
+    return render(request,'pages/home.html', context={
+       "actor":actor,
+       "member_ID":member_ID,
     })
 
 def notification_view(request):
