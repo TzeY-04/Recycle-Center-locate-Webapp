@@ -25,6 +25,7 @@
         <button type="submit">Search</button>
     </form>
 
+    {% if actor != "guest" %}
     <form action="NewFoundRecycleCenter" method="POST">
         {% csrf_token %}
         <p>New Found Recycle Center</p>
@@ -32,6 +33,7 @@
         <input type="hidden" name="ID" value="{{ member_ID }}">
         <button type="submit">Fill up form</button>
     </form>
+    {% endif %}
 </body>
 </html>
 

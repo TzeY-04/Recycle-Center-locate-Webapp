@@ -29,6 +29,13 @@ def login_view(request):
         "actor" : actor
     })
 
+def default_home_view(request):
+    actor = "guest"
+    
+    return render(request, 'pages/home.html', context={
+        "actor":actor
+    })
+
 def home_view(request):
     actor = request.GET.get('actor')
     member_ID = request.GET.get("ID")
