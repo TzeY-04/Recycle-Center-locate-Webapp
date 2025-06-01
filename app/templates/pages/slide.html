@@ -2,43 +2,85 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'styles/slide-styles.css' %}">
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Slides</title>
-        <link rel="stylesheet" href="{% static 'styles/slide-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <h1>Slides page</h1>
-            <p>{{actor}} and {{member_ID}}</p>
-            <div class="container2">
-                <form action="SearchedSlide" method="POST">
-                    {% csrf_token %}
-                    <label for="slide_type">Search by type:</label>
-                    <select name="slide_type" id="slide_type">
-                        <option value="paper">Paper</option>
-                        <option value="plastic">Plastic</option>
-                        <option value="can">Can</option>
-                        <option value="tin">Tin</option>
-                    </select>
-                    <input type="hidden" name="actor" value="{{ actor }}">
-                    <input type="hidden" name="ID" value="{{ member_ID }}">
-                    <input type="hidden" name="slide_word" value="">
-                    <button type="submit">Search</button>
-                </form>
-                <form action="SearchedSlide" method="POST">
-                    {% csrf_token %}
-                    <p>Search by word</p>
-                    <input type="text" name="slide_word"  placeholder="Search..." required>
-                    <input type="hidden" name="actor" value="{{ actor }}">
-                    <input type="hidden" name="ID" value="{{ member_ID }}">
-                    <button type="submit">Search</button>
-                </form> 
+<figure class="text-end">
+  <figcaption class="blockquote-footer text-dark">
+    current member: <cite title="Source Title"><p class="text-info ">{{ actor }} and {{ member_ID }}</p></cite>
+  </figcaption>
+</figure>
+<div class="container col-md-9">
+    <h1>Recycling Slide Search</h1>
+    <br>
+    <figcaption class="blockquote-footer text-dark">
+        <strong>Please select a recycle type or manually search for related recycling slides.</strong>
+    </figcaption>
+
+    <br>
+    
+
+    <div class="list-group col-md-6">
+
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">
+                    Search by Type
+                    <button type="button" class="btn btn-sm btn-outline-light ms-2" data-bs-toggle="popover" title="Info" data-bs-content="Choose one of the following types: Paper, Plastic, Can, Tin.">
+                        ⓘ
+                    </button>
+
+                </h5>
+                <small><span class="badge rounded-pill bg-dark">Choose Slide Type</span></small>
             </div>
-        </div>
-    </body>
-</html>
+            <form action="SearchedSlide" method="POST" class="mt-2">
+                {% csrf_token %}
+                <select name="slide_type" id="slide_type" class="form-select mb-3">
+                    <option value="paper">Paper</option>
+                    <option value="plastic">Plastic</option>
+                    <option value="can">Can</option>
+                    <option value="tin">Tin</option>
+                </select>
+                <input type="hidden" name="actor" value="{{ actor }}">
+                <input type="hidden" name="ID" value="{{ member_ID }}">
+                <input type="hidden" name="slide_word" value="">
+                <button type="submit" class="btn btn-light btn-sm">Search</button>
+            </form>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">Search by Word
+                    <button type="button" class="btn btn-sm btn-outline-dark ms-2" data-bs-toggle="popover" title="Info" data-bs-content="You can search the recycling slide manually here.">
+                        ⓘ
+                    </button>
+                </h5>
+                <small class="text-muted"><span class="badge rounded-pill bg-dark">Enter Keyword</span></small>
+            </div>
+            <form action="SearchedSlide" method="POST" class="mt-2">
+                {% csrf_token %}
+                <input type="text" name="slide_word" placeholder="Search..." required class="form-control mb-3">
+                <input type="hidden" name="actor" value="{{ actor }}">
+                <input type="hidden" name="ID" value="{{ member_ID }}">
+                <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </form>
+        </a>
+
+    </div>
+</div>
+
+{% block scripts %}
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    popoverTriggerList.forEach(function (popoverTriggerEl) {
+      new bootstrap.Popover(popoverTriggerEl, {
+        trigger: 'focus'
+      })
+        
+      
+    })
+  })
+</script>
+{% endblock %}
 
 {% endblock content %}

@@ -3,29 +3,21 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Login</title>
-        <link rel="stylesheet" href="{% static 'styles/login-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <div class="form">
-            <form method="POST">
-                <h1 class="header">Login</h1>
-                {% csrf_token %}
-                <div class="login_form">{{ form.as_p }}</div>
-                <button class="btn" type="submit">Login</button>
-                <p class="text">{{ error_message }}</p>
-                
-                </form>
-                <form>
-                    <a href="{% url 'home' %}?actor={{ actor }}" class="guest">Visit as guest</a>
-                </form> 
-            </div>
-        </div>
-    </body>
-</html>
+<link rel="stylesheet" href="{% static 'styles/login-styles.css' %}">
 
+<div class="container">
+    <div class="form">
+        <form method="POST">
+            <h1 class="header">Login</h1>
+            {% csrf_token %}
+            <div class="login_form">{{ form.as_p }}</div>
+            <button class="btn btn-primary" type="submit">Login</button>
+            <p class="text">{{ error_message }}</p>
+        </form>
+
+        <form>
+            <a href="{% url 'home' %}?actor={{ actor }}" class="guest">Visit as guest</a>
+        </form>
+    </div>
+</div>
 {% endblock content %}

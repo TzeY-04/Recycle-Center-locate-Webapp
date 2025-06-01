@@ -1,6 +1,7 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background-color: #E0F7FA;
 }
 
 .navbar {
@@ -48,5 +49,21 @@ body {
 
 .nav-right a:hover {
     color: red;
+}
+
+
+
+.navbar .nav-link:hover {
+    color: blanchedalmond !important; 
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: #198754;
+    color:white;
+    transform: scale(1.05);
+    transition: all 0.3s ease;
 }
 
