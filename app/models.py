@@ -40,3 +40,10 @@ class SlideComment(models.Model):
     slide_ID = models.ForeignKey(Slide, on_delete=models.CASCADE)
     member_ID = models.ForeignKey(Member, on_delete=models.CASCADE,null=True)
     comment = models.TextField()
+
+class NewFoundRecycleCenter(models.Model):
+    rc_latitude = models.FloatField(null=True)
+    rc_longitude = models.FloatField(null=True)
+    rc_name = models.CharField(max_length=100)
+    rc_address = models.TextField()
+    rc_region = models.ForeignKey(Region, on_delete=models.CASCADE,null=True)
