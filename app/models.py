@@ -47,3 +47,4 @@ class NewFoundRecycleCenter(models.Model):
     rc_name = models.CharField(max_length=100)
     rc_address = models.TextField()
     rc_region = models.ForeignKey(Region, on_delete=models.CASCADE,null=True)
+    rc_submitby = models.ForeignKey(Member, on_delete=models.CASCADE,null=True)
