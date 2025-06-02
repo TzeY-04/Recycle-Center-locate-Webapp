@@ -48,3 +48,8 @@ class NewFoundRecycleCenter(models.Model):
     rc_address = models.TextField()
     rc_region = models.ForeignKey(Region, on_delete=models.CASCADE,null=True)
     rc_submitby = models.ForeignKey(Member, on_delete=models.CASCADE,null=True)
+
+class Notification(models.Model):
+    member_ID = models.ForeignKey(Member, on_delete=models.CASCADE)
+    not_title = models.CharField(max_length=100)
+    not_description = models.TextField()

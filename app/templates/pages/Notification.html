@@ -15,6 +15,14 @@
                 <h1>Notification</h1>
                 <p>{{actor}} and {{member_ID}}</p>
             </div>
+            <div>
+                <ul>
+                    {% for not in all_not %}
+                        <li>Title: {{not.not_title}}</li>
+                        <li>Description: {{not.not_description}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </body>
 </html>

@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .form import LoginForm
 from .slides import SearchSlide
 from .comments import Comment
-from .models import RecycleCenter,Region,NewFoundRecycleCenter,Member
+from .models import RecycleCenter,Region,NewFoundRecycleCenter,Member,Notification
 
 # Create your views here.
 
@@ -187,7 +187,9 @@ def new_RC_form(request):
 def notification_view(request):
     actor = request.GET.get('actor')
     member_ID = request.GET.get("ID")
+    all_not = Notification.objects.filter(member_ID=member_ID)
     return render(request, 'pages/Notification.html', context={
        "actor":actor,
-       "member_ID":member_ID
+       "member_ID":member_ID,
+       "all_not":all_not
     })
