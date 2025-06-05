@@ -45,9 +45,7 @@
 
   <!-- Back to Search -->
   <div class="mt-4">
-    <a href="{% url 'slide' %}" class="btn btn-outline-secondary"
-      >Back to Search</a
-    >
+    <a href="{% url 'slide' %}?actor={{ actor }}&ID={{member_ID}}" class="btn btn-outline-secondary">Back to Search</a>
   </div>
 </div>
 {% endblock content %}
