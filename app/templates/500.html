@@ -1,58 +1,26 @@
-{% extends "pages/content_block.html" %} {% load static %} {% block content %}
+{% load static %} 
 
-<style>
-  body {
-    background-color: #f8f9fa;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="{% static 'styles/500-styles.css' %}">
+  </head>
 
-  .error-container {
-    max-width: 600px;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+  <div class="error-container">
+    <div class="error-code">500</div>
+    <div class="error-title">Oops! Something went wrong.</div>
+    <p class="error-description">
+      Sorry, the site is temporarily unavailable.<br />Please try again later.
+    </p>
 
-  .error-code {
-    font-size: 6rem;
-    font-weight: 700;
-    color: #dc3545;
-  }
+    <form action="{% url 'home' %}" method="GET">
+      {% csrf_token %}
+      <input type="hidden" name="actor" value="{{ actor }}" />
+      <input type="hidden" name="ID" value="{{ member_ID }}" />
+      <button type="submit" class="btn btn-outline-secondary">Home</button>
+    </form>
+  </div>
+</html>
 
-  .error-title {
-    font-size: 1.75rem;
-    font-weight: 500;
-    color: #333;
-  }
 
-  .error-description {
-    color: #666;
-    margin-bottom: 1.5rem;
-  }
 
-  .btn {
-    width: 150px;
-  }
-</style>
-
-<div class="error-container">
-  <div class="error-code">500</div>
-  <div class="error-title">Oops! Something went wrong.</div>
-  <p class="error-description">
-    Sorry, the site is temporarily unavailable.<br />Please try again later.
-  </p>
-
-  <form action="{% url 'home' %}" method="GET">
-    {% csrf_token %}
-    <input type="hidden" name="actor" value="{{ actor }}" />
-    <input type="hidden" name="ID" value="{{ member_ID }}" />
-    <button type="submit" class="btn btn-outline-secondary">Home</button>
-  </form>
-</div>
-
-{% endblock %}
