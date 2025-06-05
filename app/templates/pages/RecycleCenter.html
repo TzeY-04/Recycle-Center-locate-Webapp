@@ -1,64 +1,57 @@
 {% extends "pages/content_block.html" %} {% load static %} {% block content %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Recycle Centers Main</title>
-    <link rel="stylesheet" href="{% static 'styles/RC-styles.css' %}" />
-  </head>
-  <body>
-    <figure class="text-end">
-      <figcaption class="blockquote-footer text-dark">
-        current member:
-        <cite title="Source Title"
-          ><p class="text-info">{{ actor }} and {{ member_ID }}</p></cite
-        >
-      </figcaption>
-    </figure>
-    <div class="container mt-5">
-      <!-- text manip -->
-      <div class="text-center">
-        <h1 class="mb-3">Recycling Spot Finder</h1>
-        <p class="text-muted">
-          Find Recycle Center by Region (e.g., Puchong/Kajang)
-        </p>
-      </div>
+<link rel="stylesheet" href="{% static 'styles/RC-styles.css' %}" />
+<figure class="text-end me-4 mt-3">
+  <figcaption class="blockquote-footer text-dark">
+    <span class="text-info">
+      Logged in as: {{ actor }} (ID: {{ member_ID }})
+    </span>
+  </figcaption>
+</figure>
 
-      <!-- form manip -->
-      <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
-          <form action="SearchRecycleCenter" method="POST">
-            {% csrf_token %}
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                name="region"
-                placeholder="Your Region..."
-                required
-                aria-describedby="button-addon2"
-              />
-              <button type="submit" class="btn btn-success" id="button-addon2">
-                Search
-              </button>
-            </div>
-            <input type="hidden" name="actor" value="{{ actor }}" />
-            <input type="hidden" name="ID" value="{{ member_ID }}" />
-          </form>
+<div class="container mt-5">
+  <!-- Title and Description -->
+  <div class="text-center mb-4">
+    <h1 class="mb-2">Recycling Spot Finder</h1>
+    <p class="text-muted">Search by region (e.g., Puchong, Kajang)</p>
+  </div>
+
+  <!-- Region Search Form -->
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      <form action="SearchRecycleCenter" method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            name="region"
+            placeholder="Enter region..."
+            required
+            aria-label="Search by region"
+          />
+          <button type="submit" class="btn btn-success">Search</button>
         </div>
-      </div>
+        <input type="hidden" name="actor" value="{{ actor }}" />
+        <input type="hidden" name="ID" value="{{ member_ID }}" />
+      </form>
+
+      {% if error %}
+      <div class="alert alert-danger mt-3" role="alert">{{ error }}</div>
+      {% endif %}
     </div>
+  </div>
+</div>
 
-    {% if actor != "guest" %}
-    <form action="NewFoundRecycleCenter" method="POST">
-      {% csrf_token %}
-      <p>New Found Recycle Center</p>
-      <input type="hidden" name="actor" value="{{ actor }}" />
-      <input type="hidden" name="ID" value="{{ member_ID }}" />
-      <button type="submit">Fill up form</button>
-    </form>
-    {% endif %}
-  </body>
-</html>
-
-{% endblock content %}
+{% if actor != "guest" %}
+<!-- Suggest New Recycling Center Button -->
+<div class="text-center my-5">
+  <form action="NewFoundRecycleCenter" method="POST">
+    {% csrf_token %}
+    <p>Want to suggest a new recycling center?</p>
+    <input type="hidden" name="actor" value="{{ actor }}" />
+    <input type="hidden" name="ID" value="{{ member_ID }}" />
+    <button type="submit" class="btn btn-primary">Fill Out the Form</button>
+  </form>
+</div>
+{% endif %} {% endblock content %}

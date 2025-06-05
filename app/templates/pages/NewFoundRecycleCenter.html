@@ -1,73 +1,116 @@
 {% extends "pages/content_block.html" %} {% load static %} {% block content %}
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Recycle Centers new found</title>
-    <link rel="stylesheet" href="{% static 'styles/RC-styles.css' %}" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="container2">
-        <h1>RecycleCenter</h1>
-        <p>{{actor}} and {{member_ID}}</p>
-      </div>
+<link rel="stylesheet" href="{% static 'styles/N_RC-styles.css' %}" />
+
+<figure class="text-end me-4 mt-3">
+  <figcaption class="blockquote-footer text-dark">
+    <span class="text-info">
+      Logged in as: {{ actor }} (ID: {{ member_ID }})
+    </span>
+  </figcaption>
+</figure>
+
+<div class="container my-4">
+  <!-- Header -->
+  <div class="text-center mb-3">
+    <h1 class="mb-1">Submit a New Recycling Center</h1>
+  </div>
+
+  <!-- Form for user input -->
+  <div class="container mt-5">
+    <div class="smaller-content">
+      <form action="NewFoundForm" method="POST" class="card p-4 shadow-sm">
+        {% csrf_token %}
+        <input type="hidden" name="actor" value="{{ actor }}" />
+        <input type="hidden" name="ID" value="{{ member_ID }}" />
+
+        <div class="mb-2">
+          <label for="rc__name" class="form-label">Recycle Center Name</label>
+          <input
+            type="text"
+            id="rc__name"
+            name="rc__name"
+            value="{{ rc__name }}"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-2">
+          <label for="rc__address" class="form-label">Address</label>
+          <input
+            type="text"
+            id="rc__address"
+            name="rc__address"
+            value="{{ rc__address }}"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="rc__latitude" class="form-label"
+              >Latitude (optional)</label
+            >
+            <input
+              type="number"
+              step="any"
+              id="rc__latitude"
+              name="rc__latitude"
+              value="{{ rc__latitude }}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="rc__longitude" class="form-label"
+              >Longitude (optional)</label
+            >
+            <input
+              type="number"
+              step="any"
+              id="rc__longitude"
+              name="rc__longitude"
+              value="{{ rc__longitude }}"
+              class="form-control"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="rc__region" class="form-label">Region</label>
+          <input
+            type="text"
+            id="rc__region"
+            name="rc__region"
+            value="{{ rc__region }}"
+            placeholder="E.g., Puchong, Kajang"
+            class="form-control"
+            required
+          />
+        </div>
+
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-success w-auto">Submit</button>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <form action="NewFoundForm" method="POST">
-      {% csrf_token %}
-      <p>New Found Recycle Center</p>
-      <input type="hidden" name="actor" value="{{ actor }}" />
-      <input type="hidden" name="ID" value="{{ member_ID }}" />
-      <input
-        type="text"
-        name="rc__name"
-        value="{{rc__name}}"
-        placeholder="Recycle Center's Name"
-        required
-      />
-      <input
-        type="text"
-        name="rc__address"
-        value="{{rc__address}}"
-        placeholder="Address"
-        required
-      />
-      <input
-        type="number"
-        step="any"
-        name="rc__latitude"
-        value="{{rc__latitude}}"
-        placeholder="Latitude (optional)"
-      />
-      <input
-        type="number"
-        step="any"
-        name="rc__longitude"
-        value="{{rc__longitude}}"
-        placeholder="Longitude (optional)"
-      />
-      <input
-        type="text"
-        name="rc__region"
-        value="{{rc__region}}"
-        placeholder="Region (Puchong/Kajang....)"
-        required
-      />
-      <button type="submit">Submit</button>
-    </form>
-
+  <!-- Cancel button -->
+  <div style="max-width: 500px; margin: 0 auto" class="mt-3">
     <form action="{% url 'home' %}" method="GET">
       {% csrf_token %}
       <input type="hidden" name="actor" value="{{ actor }}" />
       <input type="hidden" name="ID" value="{{ member_ID }}" />
-      <button type="submit">Cancel</button>
+      <button type="submit" class="btn btn-outline-secondary">Cancel</button>
     </form>
-
-    {% if error %}
-    <div>{{ error }}</div>
-    {% endif %}
-  </body>
-</html>
+  </div>
+</div>
 
 {% endblock content %}

@@ -1,51 +1,80 @@
-{% extends "pages/content_block.html" %}
-{% load static %}
+{% extends "pages/content_block.html" %} {% load static %} {% block content %}
 
-{% block content %}
+<link rel="stylesheet" href="{% static 'styles/SelectedSlide-styles.css' %}" />
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Selected Slides</title>
-        <link rel="stylesheet" href="{% static 'styles/SelectedSlide-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <h1>Selected Slides page</h1>
-            <p>{{actor}} and {{member_ID}}</p>
-            <div class="container2">
-                <div>
-                    <ul>
-                        <li>Title: {{ slide.slide_title }}</li>
-                        <img src="{% static 'images/' %}{{ slide.slide_ID }}.png" alt="{{ slide.slide_title }}">
-                        <li>Description: {{ slide.slide_description }}</li>
-                    </ul>
-                </div>
-                <div>
-                    
-                    <form method="POST">
-                        {% csrf_token %}
-                        <p>Leave a comment</p>
-                        <input type="text" name="comment"  placeholder="Leave ur comment..." required>
-                        <input type="hidden" name="actor" value="{{ actor }}">
-                        <input type="hidden" name="ID" value="{{ member_ID }}">
-                        <input type="hidden" name="slideID" value="{{ slide.slide_ID }}">
-                        {% if actor == "guest" %}
-                        <button type="submit" disabled>Submit</button>
-                        {% else %}
-                            <button type="submit">Submit</button>
-                        {% endif %}
-                    </form> 
+<figure class="text-end me-4 mt-3">
+  <figcaption class="blockquote-footer text-dark">
+    <span class="text-info">
+      Logged in as: {{ actor }} (ID: {{ member_ID }})
+    </span>
+  </figcaption>
+</figure>
 
-                    <h2>Comments</h2>
-                    {% for comment in comments %}
-                        <p>{{ comment.member_ID.member_name }}: {{ comment.comment }}</p>
-                    {% endfor %}
-                </div>
+<div class="container my-5">
+  <!-- Slide content with image and description side by side -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <img
+          src="{% static 'images/' %}{{ slide.slide_ID }}.png"
+          alt="{{ slide.slide_title }}"
+          class="card-img-top img-fluid rounded"
+        />
+      </div>
+    </div>
 
-            </div>
+    <div class="col-md-8">
+      <div class="card shadow-sm p-3">
+        <p class="mb-0">{{ slide.slide_description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comments section -->
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h5 class="mb-4">Leave a Comment</h5>
+
+      <form method="POST" class="mb-4">
+        {% csrf_token %}
+        <div class="mb-3">
+          <textarea
+            class="form-control custom-textarea"
+            name="comment"
+            rows="3"
+            placeholder="Leave your comment..."
+            required
+          ></textarea>
         </div>
-    </body>
-</html>
+        <input type="hidden" name="actor" value="{{ actor }}" />
+        <input type="hidden" name="ID" value="{{ member_ID }}" />
+        <input type="hidden" name="slideID" value="{{ slide.slide_ID }}" />
+        {% if actor == "guest" %}
+        <button
+          type="submit"
+          class="btn btn-secondary w-100"
+          disabled
+          title="Please log in to comment"
+        >
+          Submit
+        </button>
+        {% else %}
+        <button type="submit" class="btn btn-primary w-100">Submit</button>
+        {% endif %}
+      </form>
+
+      <h5 class="mb-3">Comments</h5>
+
+      {% for comment in comments %}
+      <p>
+        <strong>{{ comment.member_ID.member_name }}</strong>: {{ comment.comment
+        }}
+      </p>
+      {% empty %}
+      <p class="text-muted">No comments yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
 
 {% endblock content %}

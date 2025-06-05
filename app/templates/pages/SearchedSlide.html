@@ -1,38 +1,53 @@
-{% extends "pages/content_block.html" %}
-{% load static %}
+{% extends "pages/content_block.html" %} {% load static %} {% block content %}
 
-{% block content %}
+<title>Searched Slides</title>
+<link rel="stylesheet" href="{% static 'styles/SearchedSlide-styles.css' %}" />
+<figure class="text-end me-4 mt-3">
+  <figcaption class="blockquote-footer text-dark">
+    <span class="text-info">
+      Logged in as: {{ actor }} (ID: {{ member_ID }})
+    </span>
+  </figcaption>
+</figure>
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Searched Slides</title>
-        <link rel="stylesheet" href="{% static 'styles/SearchedSlide-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <div class="container2">
-                <h1>Searched Slides page</h1>
-                <p>{{actor}} and {{member_ID}}</p>
-                <p>{{found_message}}</p>
-                <ul>
-                    {% for related_slide in related_slides %}
-                        <li>Title : {{ related_slide.slide_title }}</li>
-                        <li>Type : {{ related_slide.slide_type }}</li>
-                        <form action="SelectedSlide" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" name="actor" value="{{ actor }}">
-                            <input type="hidden" name="ID" value="{{ member_ID }}">
-                            <input type="hidden" name="slideID" value="{{ related_slide.slide_ID}}">
-                            <button type="submit">Select</button>
-                        </form>
-                    {% endfor %}
-                </ul>
-                
-            </div>
+<div class="container mt-5">
+  <!-- Slide list -->
+  {% if related_slides %}
+  <h1 class="mb-3">Search Results</h1>
+  <p class="text-muted">We found something for you!</p>
+  <div class="row">
+    {% for slide in related_slides %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ slide.slide_title }}</h5>
+          <p class="card-text">Type: {{ slide.slide_type }}</p>
+          <form action="SelectedSlide" method="POST" class="mt-auto">
+            {% csrf_token %}
+            <input type="hidden" name="actor" value="{{ actor }}" />
+            <input type="hidden" name="ID" value="{{ member_ID }}" />
+            <input type="hidden" name="slideID" value="{{ slide.slide_ID }}" />
+            <button type="submit" class="btn custom-btn w-100">
+              View Details
+            </button>
+          </form>
         </div>
-        
-    </body>
-</html>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <h1 class="mb-3">Search Results</h1>
+  <div class="alert alert-warning" role="alert">
+    No matching slides found. Try adjusting your search.
+  </div>
+  {% endif %}
 
+  <!-- Back to Search -->
+  <div class="mt-4">
+    <a href="{% url 'slide' %}" class="btn btn-outline-secondary"
+      >Back to Search</a
+    >
+  </div>
+</div>
 {% endblock content %}
