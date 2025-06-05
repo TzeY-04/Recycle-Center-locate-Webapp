@@ -1,4 +1,64 @@
+/* Map styling */
 #map {
-    height: 400px;
-    width: 400px;
-  }
+  flex: 1;
+  min-width: 50%;
+  height: 400px;
+  width: 100%;
+  border: 2px solid #28a745; /* green border for clarity */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Container for map and addresses side-by-side */
+.map-address-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Address list styling */
+.address-list {
+  flex: 1;
+  min-width: 40%;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  padding: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Address list items with focus and hover */
+.address-list li {
+  padding: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+.address-list li:hover,
+.address-list li:focus {
+  background-color: #d4edda; /* light green */
+  outline: none;
+}
+
+body {
+  padding-bottom: 120px;
+}
+
+/* Form styling */
+.fixed-bottom-form {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1030;
+  background: rgb(224, 252, 252);
+  padding: 10px 20px;
+  border-radius: 8px;
+  border-top: 2px solid #28a745;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}

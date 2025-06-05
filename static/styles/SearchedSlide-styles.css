@@ -1,0 +1,15 @@
+/* styles/SearchedSlide-styles.css */
+.card-title {
+    font-weight: 600;
+}
+
+.custom-btn {
+    background-color: rgb(60, 189, 90);
+    border-color: rgb(40, 167, 69);
+    color: white;
+}
+
+.custom-btn:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
