@@ -45,7 +45,7 @@
     </div>
 
     <div class="form">
-        <form method="POST">
+        <form action="login" method="POST">
             <h1 class="header">Login</h1>
             {% csrf_token %}
             <div class="login_form">{{ form.as_p }}</div>
@@ -55,6 +55,10 @@
 
         <form>
             <a href="{% url 'home' %}?actor={{ actor }}" class="guest">Visit as guest</a>
+        </form>
+
+        <form>
+            <a href="{% url 'Register' %}?actor={{ actor }}" class="guest">Register as member</a>
         </form>
     </div>
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .form import LoginForm
+from .form import LoginForm,RegisterForm
 from .slides import SearchSlide
 from .comments import Comment
 from .models import RecycleCenter,Region,NewFoundRecycleCenter,Member,Notification
@@ -192,4 +192,33 @@ def notification_view(request):
        "actor":actor,
        "member_ID":member_ID,
        "all_not":all_not
+    })
+
+def register_view(request):
+    actor = request.GET.get('actor')
+    member_ID = request.GET.get("ID")
+    form = RegisterForm()
+    error_message = ""
+    if request.method == "POST":
+        password = request.POST.get("password")
+        c_password = request.POST.get("confirm_password")
+        MID = request.POST.get("ID")
+        name = request.POST.get("name")
+        if form.check_Password(password,c_password) and form.check_ID(MID):
+            form.save(MID,name,password)
+            error_message = "Register successful please try login"
+            form = LoginForm()
+            return render(request, 'pages/login.html', context={
+                "actor":actor,
+                "member_ID":member_ID,
+                "form":form,
+                "error_message":error_message
+            })
+        else:
+            error_message = "This ID has been taken."
+    return render(request, 'pages/Register.html', context={
+        "actor":actor,
+        "member_ID":member_ID,
+        "form":form,
+        "error_message":error_message
     })

@@ -14,4 +14,5 @@ urlpatterns = [
     path('SearchRecycleCenter',views.search_RC_view, name="SearchRecycleCenter"),
     path('NewFoundRecycleCenter',views.new_RC_found, name="NewFoundRecycleCenter"),
     path('NewFoundForm',views.new_RC_form, name="NewFoundForm"),
+    path('Register',views.register_view, name="Register"),
 ]
