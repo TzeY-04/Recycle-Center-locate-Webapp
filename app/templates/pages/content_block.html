@@ -24,7 +24,9 @@
         {% if actor == "guest" %}
           Guest
         {% else %}
-          Member
+          <a href="{% url 'Notification' %}?actor={{ actor }}&ID={{member_ID}}" class="no-underline">
+              Notifications
+          </a>
         {% endif %}
       </span>
     </div>
@@ -46,7 +48,7 @@
   </div>
 </nav>
 
-        <div class="container mt-4">
+        <div class="container-fluid mt-4">
             {% block content %}
             {% endblock content %}
         </div>

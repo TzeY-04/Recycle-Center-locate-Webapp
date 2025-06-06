@@ -5,7 +5,45 @@
 
 <link rel="stylesheet" href="{% static 'styles/login-styles.css' %}">
 
-<div class="container">
+<div class="container-fluid">
+
+    <div class="slider">
+        <div class="slide-track">
+            <div class="item" ><img src="{% static 'logos/barstool-store.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/budweiser.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/buzzfeed.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/forbes.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/macys.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/menshealth.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/mrbeast.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle1.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle2.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle3.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo2.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo3.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle3.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo2.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo3.svg' %}" /></div>
+
+
+            <div class="item" ><img src="{% static 'logos/barstool-store.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/budweiser.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/buzzfeed.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/forbes.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/macys.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/menshealth.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/mrbeast.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle1.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle2.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle3.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo2.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo3.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/recycle3.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo2.svg' %}" /></div>
+            <div class="item" ><img src="{% static 'logos/logo3.svg' %}" /></div>
+        </div>
+    </div>
+
     <div class="form">
         <form method="POST">
             <h1 class="header">Login</h1>
@@ -19,5 +57,6 @@
             <a href="{% url 'home' %}?actor={{ actor }}" class="guest">Visit as guest</a>
         </form>
     </div>
+
 </div>
 {% endblock content %}

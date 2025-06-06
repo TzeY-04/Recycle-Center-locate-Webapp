@@ -4,6 +4,17 @@ body {
     background-color: #E0F7FA;
 }
 
+.no-underline {
+    text-decoration: none;
+    color: black;
+    transition: color 0.3s;
+}
+
+.no-underline:hover{
+    color: #3f84ce !important;
+    
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;

@@ -5,18 +5,77 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="{% static 'styles/home-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <div class="container2">
-                <h1>Home page</h1>
-                <p>{{actor}} and {{member_ID}}</p>
-            </div>
-        </div>  
-    </body>
-</html>
 
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'styles/home-styles.css' %}">
+    <!--Font Awesome CDN-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="slide">
+
+            <div class="item item1">
+                <div class="content">
+                    <div class="name">Welcome to GreenCycle</div>
+                    <div class="des">Discover how simple steps can make a big impact. Join us in building a cleaner,
+                        greener world through
+                        recycling.</div>
+                </div>
+            </div>
+            <div class="item item2">
+                <div class="content">
+                    <div class="name">Why Recycling Matters</div>
+                    <div class="des">Learn the importance of recycling and how it helps conserve resources, reduce
+                        pollution, and protect our environment.</div>
+                </div>
+            </div>
+            <div class="item item3">
+                <div class="content">
+                    <div class="name">What Can Be Recycled?</div>
+                    <div class="des">Understand which materials are recyclable and how to sort them properly for
+                        effective waste reduction.</div>
+                </div>
+            </div>
+            <div class="item item4">
+                <div class="content">
+                    <div class="name">Find a Recycling Center</div>
+                    <div class="des">Locate nearby recycling centers quickly and easily using our interactive map.</div>
+                </div>
+            </div>
+            <div class="item item5">
+                <div class="content">
+                    <div class="name">Suggest a New Location</div>
+                    <div class="des">Know a place that accepts recyclables? Help the community by submitting new
+                        recycling center locations.</div>
+                </div>
+            </div>
+            <div class="item item4">
+                <div class="content">
+                    <div class="name">Join the Green Community</div>
+                    <div class="des">Sign up as a member to track your impact, contribute to the map, and support a
+                        sustainable future.</div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="button">
+            <button class="prev"><i class="fa-solid fa-arrow-left"></i></button>
+            <button class="next"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+
+    </div>
+</body>
+
+</html>
+<script src="{% static 'js/app.js' %}"></script>
 {% endblock content %}

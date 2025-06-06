@@ -3,28 +3,35 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>Notification</title>
-        <link rel="stylesheet" href="{% static 'styles/notification-styles.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <div class="container2">
-                <h1>Notification</h1>
-                <p>{{actor}} and {{member_ID}}</p>
-            </div>
-            <div>
-                <ul>
-                    {% for not in all_not %}
-                        <li>Title: {{not.not_title}}</li>
-                        <li>Description: {{not.not_description}}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </body>
-</html>
+<head>
+    <title>Notification</title>
+    <link rel="stylesheet" href="{% static 'styles/notification-styles.css' %}">
+</head>
 
+<body>
+    <div class="container mt-5">
+        <div class="mb-4">
+            <h1 class="display-5">Notifications</h1>
+            <p class="lead">Sent by {{ actor }} (ID: {{ member_ID }})</p>
+        </div>
+
+        <div class="row">
+            {% for not in all_not %}
+            <div class="col-md-4 mb-3">
+                <div class="card text-white bg-primary h-100">
+                    <div class="card-header">New Notification</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ not.not_title }}</h4>
+                        <p class="card-text">
+                            {{ not.not_description|truncatewords:25 }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-muted">There are currently no notifications.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
 {% endblock content %}
