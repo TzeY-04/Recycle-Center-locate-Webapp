@@ -9,22 +9,29 @@
 </head>
 
 <body>
+   <div class="form-check form-switch mode-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" />
+        <label class="form-check-label custom-cursor-default-hover" for="flexSwitchCheckDefault">
+            <i class="bi bi-moon-fill" id="modeIcon"></i> Dark Mode
+        </label>
+    </div>
+
     <div class="container mt-5">
         <div class="mb-4">
-            <h1 class="display-5">Notifications</h1>
+            <h1 class="display-5">Notifications Tab</h1>
             <p class="lead">Sent by {{ actor }} (ID: {{ member_ID }})</p>
         </div>
 
         <div class="row">
             {% for not in all_not %}
-            <div class="col-md-4 mb-3">
-                <div class="card text-white bg-primary h-100">
-                    <div class="card-header">New Notification</div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-header bg-primary text-white">
+                        <i class="bi bi-bell-fill me-2"></i>New Notification
+                    </div>
                     <div class="card-body">
-                        <h4 class="card-title">{{ not.not_title }}</h4>
-                        <p class="card-text">
-                            {{ not.not_description|truncatewords:25 }}
-                        </p>
+                        <h5 class="card-title">{{ not.not_title }}</h5>
+                        <p class="card-text">{{ not.not_description|truncatewords:25 }}</p>
                     </div>
                 </div>
             </div>
@@ -33,5 +40,7 @@
             {% endfor %}
         </div>
     </div>
+
+    <script src="{% static 'js/toggle_light_dark_mode.js' %}"></script>
 </body>
 {% endblock content %}
