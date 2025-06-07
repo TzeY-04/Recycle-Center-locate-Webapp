@@ -4,7 +4,7 @@
   min-width: 50%;
   height: 400px;
   width: 100%;
-  border: 2px solid #28a745; /* green border for clarity */
+  border: 2px solid #28a745; 
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
@@ -45,10 +45,6 @@
   outline: none;
 }
 
-body {
-  padding-bottom: 120px;
-}
-
 /* Form styling */
 .fixed-bottom-form {
   position: fixed;
@@ -61,4 +57,14 @@ body {
   border-radius: 8px;
   border-top: 2px solid #28a745;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  padding-bottom: 120px;
+  background-image: url("../images/searched_rc.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position:  center;
+  height: 100vh;
+  overflow-x: hidden;
 }

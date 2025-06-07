@@ -2,3 +2,23 @@
   max-width: 500px;
   margin: 0 auto; 
 }
+
+.custom-btn{
+    background-color: rgb(254, 130, 140);
+    border-color: rgb(40, 167, 69);
+    color: white;
+}
+
+.custom-btn:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+body {
+    background-image: url("../images/sparkling.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:  center;
+    height: 100vh;
+    overflow-x: hidden;
+}

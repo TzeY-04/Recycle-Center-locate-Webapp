@@ -1,0 +1,8 @@
+body {
+  background-image: url("../images/selected_slides.jpg");
+  background-repeat: repeat-y;     
+  background-size: 100% auto;        
+  background-position: top center;   
+  overflow-x: hidden;
+  height: auto;                     
+}
