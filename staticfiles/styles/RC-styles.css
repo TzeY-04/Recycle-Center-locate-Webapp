@@ -1,4 +1,10 @@
-body {
-  background: linear-gradient(to bottom right, #f0f9ff, #e0f7fa);
-}
 
+body {
+    background-image: url("../images/misty_plain_green.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:  center;
+    height: 100vh;
+    overflow-x: hidden;
+    //background: linear-gradient(to bottom right, #f0f9ff, #e0f7fa);
+}
