@@ -2,16 +2,7 @@
 
 <link rel="stylesheet" href="{% static 'styles/N_RC-styles.css' %}" />
 
-<figure class="text-end me-4 mt-3">
-  <figcaption class="blockquote-footer text-dark">
-    <span class="text-info">
-      Logged in as: {{ actor }} (ID: {{ member_ID }})
-    </span>
-  </figcaption>
-</figure>
-
 <div class="container my-4">
-  <!-- Header -->
   <div class="text-center mb-3">
     <h1 class="mb-1">Submit a New Recycling Center</h1>
   </div>
@@ -108,7 +99,7 @@
       {% csrf_token %}
       <input type="hidden" name="actor" value="{{ actor }}" />
       <input type="hidden" name="ID" value="{{ member_ID }}" />
-      <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+      <button type="submit" class="btn btn-outline-secondary custom-btn">Cancel</button>
     </form>
   </div>
 </div>

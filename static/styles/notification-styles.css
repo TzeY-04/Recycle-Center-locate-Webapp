@@ -1,21 +1,24 @@
- body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
+body.dark-mode {
+        background-color: #121212;
+        color: #e0e0e0;
+    }
 
-        .dark-mode .card {
-            background-color: #1f1f1f;
-            color: #e0e0e0;
-            border: 1px solid #333;
-        }
+    .dark-mode .card {
+        background-color: #1f1f1f;
+        color: #e0e0e0;
+        border: 1px solid #333;
+    }
 
-        .dark-mode .card-header {
-            background-color: #2a2a2a;
-        }
+    .dark-mode .card-header {
+        background-color: #2a2a2a;
+    }
 
-        .mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 30px;
-            z-index: 999;
-        }
+    .mode-toggle {
+        position: fixed;
+        top: 20px;
+        right: 30px;
+        z-index: 999;
+    }
+
+
+   

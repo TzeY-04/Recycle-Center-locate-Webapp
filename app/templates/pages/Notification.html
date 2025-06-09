@@ -14,23 +14,19 @@
         <label class="form-check-label custom-cursor-default-hover" for="flexSwitchCheckDefault">
             <i class="bi bi-moon-fill" id="modeIcon"></i> Dark Mode
         </label>
+        <h1 class="display-5">Notifications Tab</h1>
     </div>
+    <br>
 
-    <div class="container mt-5">
-        <div class="mb-4">
-            <h1 class="display-5">Notifications Tab</h1>
-            <p class="lead">Sent by {{ actor }} (ID: {{ member_ID }})</p>
-        </div>
 
         <div class="row">
             {% for not in all_not %}
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm border-0 h-100">
                     <div class="card-header bg-primary text-white">
-                        <i class="bi bi-bell-fill me-2"></i>New Notification
+                        <h5 class="card-title">{{ not.not_title }}</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ not.not_title }}</h5>
                         <p class="card-text">{{ not.not_description|truncatewords:25 }}</p>
                     </div>
                 </div>

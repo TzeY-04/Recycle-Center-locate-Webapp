@@ -1,19 +1,12 @@
 {% extends "pages/content_block.html" %} {% load static %} {% block content %}
 
 <link rel="stylesheet" href="{% static 'styles/RC-styles.css' %}" />
-<figure class="text-end me-4 mt-3">
-  <figcaption class="blockquote-footer text-dark">
-    <span class="text-info">
-      Logged in as: {{ actor }} (ID: {{ member_ID }})
-    </span>
-  </figcaption>
-</figure>
 
 <div class="container mt-5">
   <!-- Title and Description -->
   <div class="text-center mb-4">
     <h1 class="mb-2">Recycling Spot Finder</h1>
-    <p class="text-muted">Search by region (e.g., Puchong, Kajang)</p>
+    <p class="text-shadow">Search by region (e.g., Puchong, Kajang)</p>
   </div>
 
   <!-- Region Search Form -->
@@ -48,10 +41,20 @@
 <div class="text-center my-5">
   <form action="NewFoundRecycleCenter" method="POST">
     {% csrf_token %}
-    <p>Want to suggest a new recycling center?</p>
+    <p class="text-shadow">Want to suggest a new recycling center?</p>
     <input type="hidden" name="actor" value="{{ actor }}" />
     <input type="hidden" name="ID" value="{{ member_ID }}" />
     <button type="submit" class="btn btn-primary">Fill Out the Form</button>
   </form>
 </div>
-{% endif %} {% endblock content %}
+{% endif %} 
+
+<!-- Mascot manip -->
+<div class="mascot-wrapper">
+  <div class="mascot-container">
+    <div class="earth-mascot"></div>
+    <div class="speech-bubble">Help make the Earth greener by recycling!</div>
+  </div>
+</div>
+
+{% endblock content %}
