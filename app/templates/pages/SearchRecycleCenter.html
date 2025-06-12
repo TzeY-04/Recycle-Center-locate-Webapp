@@ -1,7 +1,7 @@
 {% extends "pages/content_block.html" %} {% load static %} {% block content %}
 
 <head>
-  <title>Nearby Recycle Centers</title>
+  <title>Searched Recycle Centers</title>
   <link rel="stylesheet" href="{% static 'styles/SearchRC-styles.css' %}" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
@@ -10,13 +10,13 @@
   <div class="fixed-bottom-form text-center">
     <form action="SearchRecycleCenter" method="POST">
       {% csrf_token %}
-      <p>Search by Region</p>
+      <p>Search by city</p>
       <div class="input-group">
         <input
           type="text"
           class="form-control"
           name="region"
-          placeholder="Your Region..."
+          placeholder="Your city..."
           required
           aria-describedby="button-addon2"
         />
