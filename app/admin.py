@@ -33,7 +33,7 @@ class SlideAdminForm(forms.ModelForm):
         fields = '__all__'
         
 @admin.register(Slide)
-class Slide(admin.ModelAdmin):
+class SlideAdmin(admin.ModelAdmin):
     form = SlideAdminForm
     list_display = ('slide_ID', 'slide_title', 'slide_type', 'preview_model')
     readonly_fields = ('preview_model',)
@@ -42,31 +42,40 @@ class Slide(admin.ModelAdmin):
         image = form.cleaned_data.get('upload_image')
         remove = form.cleaned_data.get('remove_image')
 
-        # Image file path
-        folder = os.path.join(settings.BASE_DIR, 'app', 'static', 'images')
-        filepath = os.path.join(folder, f"{obj.slide_ID}.png")
+        # Two folder file path
+        static_folder = os.path.join(settings.BASE_DIR, 'static', 'images')
+        staticfiles_folder = os.path.join(settings.BASE_DIR, 'staticfiles', 'images')
+        
+        static_filepath= os.path.join(static_folder, f"{obj.slide_ID}.png")
+        staticfiles_filepath= os.path.join(staticfiles_folder, f"{obj.slide_ID}.png")
+        
 
         # Delete old image if remove checkbox is checked
-        if remove and os.path.exists(filepath):
-            os.remove(filepath)
+        if remove:
+            for path in [static_filepath, staticfiles_filepath]:
+                if os.path.exists(path):
+                    os.remove(path)
 
         super().save_model(request, obj, form, change)
         
         if image:
             #Save image into static/images/
-            folder = os.path.join(settings.BASE_DIR, 'app', 'static', 'images')
-            os.makedirs(folder, exist_ok=True)
+            os.makedirs(static_folder, exist_ok=True)
+            os.makedirs(staticfiles_folder, exist_ok=True)
+            
+            #Read the image
+            image_data = image.read()
+            
+            with open(static_filepath, 'wb') as f1:
+                f1.write(image_data)
+            
+            with open(staticfiles_filepath, 'wb') as f2:
+                f2.write(image_data)
 
-            filename = f"{obj.slide_ID}.png"
-            filepath = os.path.join(folder, filename)
-
-            with open(filepath, 'wb+') as f:
-                for chunk in image.chunks():
-                    f.write(chunk)
-
+    @admin.display(description="Current image")
     def preview_model(self, obj):
         filename = f'{obj.slide_ID}.png'
-        file_path = os.path.join(settings.BASE_DIR, 'app', 'static', 'images', filename)
+        file_path = os.path.join(settings.BASE_DIR, 'staticfiles', 'images', filename)
 
         if os.path.exists(file_path):
             #Use version to prevent image still shown after delete because still exist in cache
@@ -75,7 +84,6 @@ class Slide(admin.ModelAdmin):
         else:
             return format_html('<span style="color: gray;">No image</span>')
 
-    preview_model.short_description = "Current image"
 
 
 @admin.register(RecycleCenter)
